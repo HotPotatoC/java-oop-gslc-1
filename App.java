@@ -30,7 +30,7 @@ public class App {
         while (true) {
             System.out.println(headerString);
 
-            System.out.printf("Earned Today: %f\n", this.moneyEarned);
+            System.out.printf("Total Earnings: %f\n", this.moneyEarned);
 
             System.out.println("1. Add Order");
             System.out.println("2. Show All Orders");
