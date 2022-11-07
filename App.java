@@ -97,8 +97,10 @@ public class App {
     }
 
     private void displayShowAllOrdersMenu() {
-        if (this.orders.size() == 0) {
+        if (this.orders.isEmpty()) {
             System.out.println("There are no orders.");
+            this.pressEnterToContinue();
+            return;
         }
 
         double grandTotal = 0;
@@ -129,6 +131,12 @@ public class App {
     }
 
     private void displayRemoveOrderMenu() {
+        if (this.orders.isEmpty()) {
+            System.out.println("There are no orders.");
+            this.pressEnterToContinue();
+            return;
+        }
+
         for (Order order : this.orders) {
             ArrayList<Item> items = order.getItems();
             System.out.println("-----------------");
