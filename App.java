@@ -37,8 +37,14 @@ public class App {
             System.out.println("3. Remove Order");
             System.out.println("4. Exit\n");
 
-            System.out.print("> ");
             int selectedMenu = 0;
+            System.out.print("> ");
+            while (!this.scan.hasNextInt()) {
+                System.out.println("Option must be an integer!");
+                System.out.print("> ");
+                this.scan.nextLine();
+            }
+
             selectedMenu = this.scan.nextInt();
             if (selectedMenu == 1)
                 this.displayAddOrderMenu();
