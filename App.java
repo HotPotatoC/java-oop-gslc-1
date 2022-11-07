@@ -17,7 +17,7 @@ public class App {
 
     public App() {
         this.orders = new ArrayList<Order>();
-        this.scan = new Scanner(System.in).useDelimiter("\n");
+        this.scan = new Scanner(System.in);
         this.moneyEarned = 0;
     }
 
@@ -56,24 +56,27 @@ public class App {
         while (!this.scan.hasNextInt()) {
             System.out.println("Table number must be an integer!");
             System.out.print("Table Number: ");
-            this.scan.next();
+            this.scan.nextLine();
         }
 
         Order newOrder = new Order();
 
         int tableNumber = this.scan.nextInt();
         newOrder.setTableNumber(tableNumber);
+        this.scan.nextLine();
 
         char addAgain = 'y';
         do {
             System.out.print("Item Name: ");
-            String name = this.scan.next();
+            String name = this.scan.nextLine();
 
             System.out.print("Item Price: ");
             double price = this.scan.nextDouble();
+            this.scan.nextLine();
 
             System.out.print("Quantity: ");
             int quantity = this.scan.nextInt();
+            this.scan.nextLine();
 
             Item newItem = new Item(name, price, quantity);
 
@@ -81,7 +84,7 @@ public class App {
             newOrder.setTotal(newOrder.getTotal() + newItem.getPrice());
 
             System.out.print("Add another item? (y/n) ");
-            addAgain = Character.toLowerCase(this.scan.next().charAt(0));
+            addAgain = Character.toLowerCase(this.scan.nextLine().charAt(0));
         } while (addAgain == 'y');
 
         this.addOrder(newOrder);
@@ -176,6 +179,7 @@ public class App {
 
     private void pressEnterToContinue() {
         System.out.println("Press Enter to continue...");
-        this.scan.next();
+        this.scan.nextLine();
+        this.scan.nextLine();
     }
 }
