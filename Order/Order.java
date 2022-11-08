@@ -42,8 +42,6 @@ public class Order {
     }
 
     public void setTotal(double total) {
-        double tax = total * 0.1;
-        double serviceFee = total * 0.075;
-        this.total = total + tax + serviceFee;
+        this.total = total;
     }
 }

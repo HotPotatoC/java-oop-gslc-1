@@ -93,6 +93,9 @@ public class App {
             addAgain = Character.toLowerCase(this.scan.nextLine().charAt(0));
         } while (addAgain == 'y');
 
+        double tax = newOrder.getTotal() * 0.1;
+        double serviceFee = newOrder.getTotal() * 0.075;
+        newOrder.setTotal(newOrder.getTotal() + tax + serviceFee);
         this.addOrder(newOrder);
     }
 
