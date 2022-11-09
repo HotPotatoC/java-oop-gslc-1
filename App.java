@@ -71,6 +71,8 @@ public class App {
         newOrder.setTableNumber(tableNumber);
         this.scan.nextLine();
 
+        int checkTableIDX = this.tableAlreadyOrdered(tableNumber);
+
         char addAgain = 'y';
         do {
             System.out.print("Item Name: ");
@@ -85,9 +87,14 @@ public class App {
             this.scan.nextLine();
 
             Item newItem = new Item(name, price, quantity);
-
-            newOrder.addItem(newItem);
-            newOrder.setTotal(newOrder.getTotal() + newItem.getPrice());
+            if (checkTableIDX != -1) {
+                Order existingOrder = this.orders.get(checkTableIDX);
+                existingOrder.addItem(newItem);
+                existingOrder.setTotal(existingOrder.getTotal() + newItem.getPrice());
+            } else {
+                newOrder.addItem(newItem);
+                newOrder.setTotal(newOrder.getTotal() + newItem.getPrice());
+            }
 
             System.out.print("Add another item? (y/n) ");
             addAgain = Character.toLowerCase(this.scan.nextLine().charAt(0));
@@ -96,7 +103,10 @@ public class App {
         double tax = newOrder.getTotal() * 0.1;
         double serviceFee = newOrder.getTotal() * 0.075;
         newOrder.setTotal(newOrder.getTotal() + tax + serviceFee);
-        this.addOrder(newOrder);
+
+        if (checkTableIDX == -1) {
+            this.addOrder(newOrder);
+        }
     }
 
     private void displayShowAllOrdersMenu() {
@@ -192,6 +202,16 @@ public class App {
             }
             idx++;
         }
+    }
+
+    private int tableAlreadyOrdered(int tableNumber) {
+        for (int i = 0; i < this.orders.size(); i++) {
+            if (this.orders.get(i).getTableNumber() == tableNumber) {
+                return i;
+            }
+        }
+
+        return -1;
     }
 
     private void pressEnterToContinue() {
